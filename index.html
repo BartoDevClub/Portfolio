@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BartoDevClub - Portfolio Sviluppatore Full Stack</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --tertiary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #81FBB8 0%, #28C76F 100%);
+            --warning-gradient: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%);
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg,
+            #667eea 0%,
+            #764ba2 25%,
+            #f093fb 50%,
+            #f5576c 75%,
+            #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-2 {
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-3 {
+            background: var(--tertiary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Advanced Animations */
+        .float-animation {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        .pulse-glow {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(102, 126, 234, 0.8), 0 0 60px rgba(118, 75, 162, 0.6);
+                transform: scale(1.05);
+            }
+        }
+
+        .tech-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tech-card:hover::before {
+            opacity: 1;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-20px) rotateX(10deg) rotateY(10deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Typing Animation Enhanced - FIXED */
+        .typing-animation {
+            border-right: 3px solid #f5576c;
+            animation: blink-caret 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 100%;
+            display: inline-block;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #f5576c; }
+        }
+
+        /* Fixed Carousel Styles */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .carousel-item {
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.4));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .carousel-item i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .carousel-item .tech-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #1f2937;
+        }
+
+        .carousel-item .tech-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        /* Carousel Navigation Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: #667eea;
+            transform: scale(1.2);
+        }
+
+        /* Enhanced Navigation */
+        .nav-link {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -10px;
+            right: -10px;
+            bottom: -5px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            opacity: 0;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::before, .nav-link.active::before {
+            opacity: 0.1;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Advanced Cards - FIXED RESPONSIVE */
+        .service-card {
+            background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: var(--primary-gradient);
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Text overflow fixes */
+        .service-card h3,
+        .service-card h4,
+        .tech-card h3,
+        .tech-card h4 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .service-card p,
+        .tech-card p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.6;
+        }
+
+        /* Glassmorphism Effects */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Loading Animation */
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: loadingDots 2s linear infinite;
+        }
+
+        @keyframes loadingDots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        /* Section Transitions */
+        .section {
+            display: none;
+            animation: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: sectionSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes sectionSlide {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Tech Badge Improvements */
+        .tech-badge {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 8px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            animation: bounceIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-badge:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3) rotate(-20deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(10deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* FAQ Styles */
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.open {
+            max-height: 500px;
+        }
+
+        /* Form Enhancements */
+        .form-input {
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+            position: relative;
+        }
+
+        .form-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 5px rgba(102, 126, 234, 0.1);
+            outline: none;
+            transform: scale(1.02);
+        }
+
+        /* Success Animation */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-animation {
+            animation: successPulse 0.6s ease;
+        }
+
+        /* Responsive Improvements - ENHANCED */
+        @media (max-width: 768px) {
+            .tech-card:hover {
+                transform: translateY(-10px) scale(1.02);
+            }
+
+            .carousel-item {
+                min-width: 160px;
+                padding: 20px;
+            }
+
+            .carousel-slide {
+                gap: 20px;
+            }
+
+            .typing-animation {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-bg h1 {
+                font-size: 3rem;
+            }
+
+            .service-card h3,
+            .service-card h4 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+
+            .tech-card h3,
+            .tech-card h4 {
+                font-size: 1.4rem;
+                line-height: 1.3;
+            }
+
+            .service-card p,
+            .tech-card p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                min-width: 140px;
+                padding: 15px;
+            }
+
+            .carousel-item i {
+                font-size: 2.5rem;
+            }
+
+            .typing-animation {
+                font-size: 2rem;
+            }
+
+            .hero-bg h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Particle Animation */
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            animation: float-particle 6s infinite ease-in-out;
+        }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100vh) rotate(360deg); opacity: 1; }
+        }
+
+        /* Print Optimization */
+        @media print {
+            .section { display: block !important; }
+            nav { display: none; }
+            footer { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-card">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <div class="text-3xl font-bold gradient-text code-font">
+                <i class="fas fa-code mr-3"></i>BartoDevClub
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link active font-semibold" onclick="showSection('home')">Home</a>
+                <a href="#" class="nav-link font-semibold" onclick="showSection('portfolio')">Portfolio</a>
+                <a href="#" class="nav-link font-semibold" onclick="showSection('info')">Chi Sono</a>
+                <a href="#" class="nav-link font-semibold" onclick="showSection('services')">Servizi</a>
+            </div>
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="text-gray-700 hover:text-purple-600 transition-colors">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+            <a href="#" class="block py-3 nav-link font-semibold" onclick="showSection('home')">Home</a>
+            <a href="#" class="block py-3 nav-link font-semibold" onclick="showSection('portfolio')">Portfolio</a>
+            <a href="#" class="block py-3 nav-link font-semibold" onclick="showSection('info')">Chi Sono</a>
+            <a href="#" class="block py-3 nav-link font-semibold" onclick="showSection('services')">Servizi</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Home Section -->
+<section id="home" class="section active">
+    <!-- Hero Section -->
+    <div class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
+        <!-- Animated Particles -->
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 1.5s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 2.5s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 3.5s;"></div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full float-animation blur-xl"></div>
+            <div class="absolute bottom-20 right-20 w-56 h-56 bg-white rounded-full float-animation blur-xl" style="animation-delay: -3s;"></div>
+            <div class="absolute top-1/2 left-1/2 w-40 h-40 bg-white rounded-full float-animation blur-xl" style="animation-delay: -6s;"></div>
+        </div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="pulse-glow bg-black bg-opacity-10 rounded-3xl p-12 backdrop-filter backdrop-blur-sm">
+                <h1 class="text-4xl md:text-6xl lg:text-8xl font-black mb-8">
+                    Ciao! Sono <span class="gradient-text-2">Barto</span>
+                    <span id="typing-text" class="typing-animation block mt-6 code-font text-3xl md:text-4xl lg:text-6xl"></span>
+                </h1>
+                <p class="text-xl md:text-2xl lg:text-3xl mb-12 opacity-95 font-medium">
+                    Neolaureato in Informatica 🎓 | Trasformo idee in codice funzionale
+                </p>
+
+                <!-- Tech Badges with Enhanced Animation -->
+                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                    <span class="tech-badge" style="animation-delay: 0.1s;">Kotlin</span>
+                    <span class="tech-badge" style="animation-delay: 0.2s;">Spring Framework</span>
+                    <span class="tech-badge" style="animation-delay: 0.3s;">Angular</span>
+                    <span class="tech-badge" style="animation-delay: 0.4s;">JavaScript</span>
+                    <span class="tech-badge" style="animation-delay: 0.5s;">Python</span>
+                    <span class="tech-badge" style="animation-delay: 0.6s;">PostgreSQL</span>
+                    <span class="tech-badge" style="animation-delay: 0.7s;">HTML/CSS</span>
+                    <span class="tech-badge" style="animation-delay: 0.8s;">JavaFX</span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <button onclick="showSection('portfolio')" class="bg-white text-purple-600 px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:rotate-1">
+                        <i class="fas fa-rocket mr-3"></i>Esplora i miei progetti
+                    </button>
+                    <button onclick="showSection('services')" class="border-2 border-white text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white hover:text-purple-600 transition-all duration-500 transform hover:scale-110 hover:-rotate-1">
+                        <i class="fas fa-handshake mr-3"></i>Collaboriamo insieme
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technologies Carousel FIXED -->
+    <div class="py-24 bg-gradient-to-r from-gray-50 to-blue-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-black text-center mb-16 gradient-text">Stack Tecnologico</h2>
+
+            <div class="carousel-container" id="tech-carousel">
+                <div class="carousel-wrapper" id="carousel-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide">
+                        <div class="carousel-item">
+                            <i class="fab fa-java text-red-600"></i>
+                            <div class="tech-name">Kotlin</div>
+                            <div class="tech-desc">Mobile & Backend</div>
+                        </div>
+                        <div class="carousel-item">
+                            <i class="fas fa-leaf text-green-600"></i>
+                            <div class="tech-name">Spring Framework</div>
+                            <div class="tech-desc">Enterprise Java</div>
+                        </div>
+                        <div class="carousel-item">
+                            <i class="fab fa-angular text-red-500"></i>
+                            <div class="tech-name">Angular</div>
+                            <div class="tech-desc">Frontend Framework</div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="carousel-item">
+                            <i class="fab fa-js text-yellow-500"></i>
+                            <div class="tech-name">JavaScript</div>
+                            <div class="tech-desc">Web Development</div>
+                        </div>
+                        <div class="carousel-item">
+                            <i class="fab fa-python text-blue-500"></i>
+                            <div class="tech-name">Python</div>
+                            <div class="tech-desc">Data & AI</div>
+                        </div>
+                        <div class="carousel-item">
+                            <i class="fas fa-database text-blue-600"></i>
+                            <div class="tech-name">PostgreSQL</div>
+                            <div class="tech-desc">Database</div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <div class="carousel-item">
+                            <i class="fab fa-html5 text-orange-500"></i>
+                            <div class="tech-name">HTML/CSS</div>
+                            <div class="tech-desc">Web Markup</div>
+                        </div>
+                        <div class="carousel-item">
+                            <i class="fab fa-php text-purple-600"></i>
+                            <div class="tech-name">PHP</div>
+                            <div class="tech-desc">Server Side</div>
+                        </div>
+                        <div class="carousel-item">
+                            <i class="fas fa-desktop text-gray-600"></i>
+                            <div class="tech-name">JavaFX</div>
+                            <div class="tech-desc">Desktop Apps</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Dots -->
+            <div class="carousel-dots" id="carousel-dots">
+                <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+                <div class="carousel-dot" onclick="goToSlide(1)"></div>
+                <div class="carousel-dot" onclick="goToSlide(2)"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section Enhanced -->
+    <div class="py-24 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-black text-center mb-20 gradient-text-2">Le mie competenze</h2>
+            <div class="grid lg:grid-cols-3 gap-10">
+                <div class="tech-card bg-white p-8 lg:p-10 rounded-3xl shadow-2xl">
+                    <div class="text-6xl gradient-text mb-6 text-center">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-2xl lg:text-3xl font-black mb-6 text-center gradient-text">Backend Development</h3>
+                    <p class="text-gray-600 mb-8 text-base lg:text-lg leading-relaxed">Sviluppo architetture robuste e scalabili con Spring Framework, gestione database avanzata e API RESTful performanti.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">Spring Boot</span>
+                        <span class="bg-gradient-to-r from-green-400 to-green-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">Kotlin</span>
+                        <span class="bg-gradient-to-r from-purple-400 to-purple-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">PostgreSQL</span>
+                        <span class="bg-gradient-to-r from-red-400 to-red-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">MariaDB</span>
+                    </div>
+                </div>
+
+                <div class="tech-card bg-white p-8 lg:p-10 rounded-3xl shadow-2xl">
+                    <div class="text-6xl gradient-text-2 mb-6 text-center">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="text-2xl lg:text-3xl font-black mb-6 text-center gradient-text-2">Frontend Development</h3>
+                    <p class="text-gray-600 mb-8 text-base lg:text-lg leading-relaxed">Creo interfacce moderne e responsive con Angular, JavaScript puro e tecnologie web all'avanguardia.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-gradient-to-r from-red-400 to-red-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">Angular</span>
+                        <span class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">JavaScript</span>
+                        <span class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">HTML/CSS</span>
+                        <span class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">JavaFX</span>
+                    </div>
+                </div>
+
+                <div class="tech-card bg-white p-8 lg:p-10 rounded-3xl shadow-2xl">
+                    <div class="text-6xl gradient-text-3 mb-6 text-center">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-2xl lg:text-3xl font-black mb-6 text-center gradient-text-3">Full Stack Solutions</h3>
+                    <p class="text-gray-600 mb-8 text-base lg:text-lg leading-relaxed">Soluzioni complete end-to-end con Python, PHP, C++ e competenze trasversali per progetti complessi.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">Python</span>
+                        <span class="bg-gradient-to-r from-purple-400 to-purple-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">PHP</span>
+                        <span class="bg-gradient-to-r from-gray-400 to-gray-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">C++</span>
+                        <span class="bg-gradient-to-r from-green-400 to-green-600 text-white px-3 py-2 rounded-full text-xs lg:text-sm font-semibold">MySQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="section">
+    <div class="py-24 bg-gradient-to-br from-white to-purple-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-6xl font-black text-center mb-20 gradient-text">Portfolio Progetti</h2>
+
+            <div class="grid lg:grid-cols-2 gap-16 mb-20">
+                <!-- Progetto 1 -->
+                <div class="tech-card bg-white rounded-3xl overflow-hidden shadow-2xl">
+                    <div class="h-80 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-shopping-cart text-8xl mb-6 drop-shadow-lg"></i>
+                            <h3 class="text-3xl font-black drop-shadow-lg">E-Commerce Platform</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-10">
+                        <h4 class="text-2xl lg:text-3xl font-black mb-6 gradient-text">Piattaforma E-Commerce Kotlin</h4>
+                        <p class="text-gray-600 mb-8 text-base lg:text-lg leading-relaxed">
+                            Sistema e-commerce completo sviluppato in Kotlin con Spring Boot. Include gestione inventario
+                            avanzata, carrello intelligente, pagamenti sicuri e dashboard amministrativa responsive con Angular.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Kotlin</span>
+                            <span class="bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Spring Boot</span>
+                            <span class="bg-gradient-to-r from-red-400 to-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Angular</span>
+                            <span class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">PostgreSQL</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                            <button class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-eye mr-2"></i>Demo Live
+                            </button>
+                            <button class="border-2 border-purple-500 text-purple-500 px-8 py-3 rounded-xl font-bold hover:bg-purple-50 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>Codice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progetto 2 -->
+                <div class="tech-card bg-white rounded-3xl overflow-hidden shadow-2xl">
+                    <div class="h-80 bg-gradient-to-br from-green-400 via-blue-500 to-purple-500 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-chart-line text-8xl mb-6 drop-shadow-lg"></i>
+                            <h3 class="text-3xl font-black drop-shadow-lg">Analytics Dashboard</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-10">
+                        <h4 class="text-2xl lg:text-3xl font-black mb-6 gradient-text-2">Dashboard Analytics Python</h4>
+                        <p class="text-gray-600 mb-8 text-base lg:text-lg leading-relaxed">
+                            Dashboard interattiva per visualizzazione dati in tempo reale sviluppata in Python.
+                            Grafici avanzati, report personalizzabili e integrazione con multiple fonti dati enterprise.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Python</span>
+                            <span class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-2 rounded-full text-sm font-semibold">JavaScript</span>
+                            <span class="bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold">MySQL</span>
+                            <span class="bg-gradient-to-r from-purple-400 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Chart.js</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                            <button class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-eye mr-2"></i>Demo Live
+                            </button>
+                            <button class="border-2 border-green-500 text-green-500 px-8 py-3 rounded-xl font-bold hover:bg-green-50 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>Codice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progetto 3 -->
+                <div class="tech-card bg-white rounded-3xl overflow-hidden shadow-2xl">
+                    <div class="h-80 bg-gradient-to-br from-red-400 via-pink-500 to-purple-500 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-desktop text-8xl mb-6 drop-shadow-lg"></i>
+                            <h3 class="text-3xl font-black drop-shadow-lg">Desktop App</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-10">
+                        <h4 class="text-2xl lg:text-3xl font-black mb-6 gradient-text-3">Applicazione Desktop JavaFX</h4>
+                        <p class="text-gray-600 mb-8 text-base lg:text-lg leading-relaxed">
+                            Applicazione desktop moderna sviluppata con JavaFX e Swing. Interfaccia intuitiva,
+                            gestione dati complessa e integrazione con database relazionali per use case enterprise.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-red-400 to-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">JavaFX</span>
+                            <span class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Java Swing</span>
+                            <span class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">MariaDB</span>
+                            <span class="bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Spring</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                            <button class="bg-gradient-to-r from-red-500 to-pink-500 text-white px-8 py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-eye mr-2"></i>Demo Live
+                            </button>
+                            <button class="border-2 border-red-500 text-red-500 px-8 py-3 rounded-xl font-bold hover:bg-red-50 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>Codice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progetto 4 -->
+                <div class="tech-card bg-white rounded-3xl overflow-hidden shadow-2xl">
+                    <div class="h-80 bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-globe text-8xl mb-6 drop-shadow-lg"></i>
+                            <h3 class="text-3xl font-black drop-shadow-lg">Web Platform</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-10">
+                        <h4 class="text-2xl lg:text-3xl font-black mb-6 gradient-text">Piattaforma Web PHP</h4>
+                        <p class="text-gray-600 mb-8 text-base lg:text-lg leading-relaxed">
+                            Piattaforma web completa sviluppata in PHP con frontend moderno. Sistema di autenticazione
+                            avanzato, gestione contenuti dinamica e architettura scalabile per alte performance.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-purple-400 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold">PHP</span>
+                            <span class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold">HTML/CSS</span>
+                            <span class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-2 rounded-full text-sm font-semibold">JavaScript</span>
+                            <span class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">MySQL</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                            <button class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-eye mr-2"></i>Demo Live
+                            </button>
+                            <button class="border-2 border-indigo-500 text-indigo-500 px-8 py-3 rounded-xl font-bold hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>Codice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center glass-card p-12 rounded-3xl">
+                <h3 class="text-4xl font-black mb-6 gradient-text-2">Vuoi vedere di più?</h3>
+                <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                    Questi sono solo alcuni dei progetti che ho sviluppato durante il mio percorso accademico e professionale.
+                </p>
+                <button onclick="showSection('services')" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-12 py-5 rounded-full font-black text-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110">
+                    <i class="fas fa-handshake mr-3"></i>Iniziamo a lavorare insieme
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Info Section -->
+<section id="info" class="section">
+    <div class="py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-6xl font-black text-center mb-20 gradient-text">Chi sono</h2>
+
+            <div class="max-w-6xl mx-auto">
+                <!-- Main Info Section -->
+                <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+                    <div>
+                        <div class="w-96 h-96 mx-auto rounded-3xl bg-gradient-to-br from-purple-400 via-blue-500 to-pink-500 flex items-center justify-center text-white shadow-2xl pulse-glow">
+                            <div class="text-center">
+                                <i class="fas fa-graduation-cap text-9xl mb-6"></i>
+                                <h3 class="text-3xl font-black">Neolaureato</h3>
+                                <p class="text-xl font-semibold">in Informatica</p>
+                                <p class="text-lg opacity-90">UNICAL</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-4xl font-black mb-8 gradient-text-2">La mia storia</h3>
+                        <p class="text-gray-700 mb-8 text-xl leading-relaxed">
+                            Sono un <strong>neolaureato in Informatica</strong> presso l'<strong>Università della Calabria (UNICAL)</strong>,
+                            dove ho sviluppato solide competenze teoriche e pratiche nel mondo dello sviluppo software.
+                            Durante il mio percorso universitario, ho approfondito linguaggi come <strong>Kotlin</strong>,
+                            <strong>Java</strong> e <strong>Python</strong>, specializzandomi in particolare nel <strong>Spring Framework</strong>.
+                        </p>
+                        <p class="text-gray-700 mb-8 text-xl leading-relaxed">
+                            La mia passione per la programmazione mi ha portato a esplorare sia il frontend con <strong>Angular</strong>
+                            e <strong>JavaScript</strong>, sia il backend con tecnologie enterprise. Credo fermamente nel potere del
+                            <strong>clean code</strong> e nell'importanza di scrivere software manutenibile e scalabile.
+                        </p>
+                        <p class="text-gray-700 text-xl leading-relaxed">
+                            Ogni progetto è per me un'opportunità di crescita e innovazione, sempre con l'obiettivo di
+                            trasformare idee complesse in soluzioni eleganti e funzionali.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Personal & Academic Info -->
+                <div class="grid md:grid-cols-2 gap-10 mb-20">
+                    <div class="glass-card p-10 rounded-3xl">
+                        <h4 class="text-3xl font-black mb-8 gradient-text">
+                            <i class="fas fa-university mr-4"></i>Formazione Accademica
+                        </h4>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-graduation-cap text-purple-600 text-2xl mt-1 mr-4"></i>
+                                <div>
+                                    <h5 class="font-bold text-xl text-gray-800">Laurea in Informatica</h5>
+                                    <p class="text-gray-600 text-lg">Università della Calabria (UNICAL)</p>
+                                    <p class="text-gray-500">Specializzazione in Sviluppo Software</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-code text-purple-600 text-2xl mt-1 mr-4"></i>
+                                <div>
+                                    <h5 class="font-bold text-xl text-gray-800">Focus Principale</h5>
+                                    <p class="text-gray-600 text-lg">Algoritmi, Strutture Dati, Ingegneria del Software</p>
+                                    <p class="text-gray-500">Programmazione Orientata agli Oggetti</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-trophy text-purple-600 text-2xl mt-1 mr-4"></i>
+                                <div>
+                                    <h5 class="font-bold text-xl text-gray-800">Progetti Accademici</h5>
+                                    <p class="text-gray-600 text-lg">Sviluppo di applicazioni enterprise</p>
+                                    <p class="text-gray-500">Sistemi distribuiti e database</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-10 rounded-3xl">
+                        <h4 class="text-3xl font-black mb-8 gradient-text-2">
+                            <i class="fas fa-user-check mr-4"></i>Competenze Personali
+                        </h4>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-lightbulb text-pink-600 text-2xl mt-1 mr-4"></i>
+                                <div>
+                                    <h5 class="font-bold text-xl text-gray-800">Problem Solving</h5>
+                                    <p class="text-gray-600 text-lg">Approccio analitico e creativo</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-users text-pink-600 text-2xl mt-1 mr-4"></i>
+                                <div>
+                                    <h5 class="font-bold text-xl text-gray-800">Team Work</h5>
+                                    <p class="text-gray-600 text-lg">Collaborazione efficace in gruppo</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-pink-600 text-2xl mt-1 mr-4"></i>
+                                <div>
+                                    <h5 class="font-bold text-xl text-gray-800">Gestione del Tempo</h5>
+                                    <p class="text-gray-600 text-lg">Organizzazione e rispetto delle scadenze</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-language text-pink-600 text-2xl mt-1 mr-4"></i>
+                                <div>
+                                    <h5 class="font-bold text-xl text-gray-800">Lingue</h5>
+                                    <p class="text-gray-600 text-lg">Italiano (nativo), Inglese (B2)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills Enhanced -->
+                <div class="glass-card p-12 rounded-3xl mb-20">
+                    <h4 class="text-4xl font-black mb-12 gradient-text-3 text-center">
+                        <i class="fas fa-code mr-4"></i>Stack Tecnologico Completo
+                    </h4>
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <div>
+                            <h5 class="font-black text-xl mb-6 text-blue-600">Backend & Mobile</h5>
+                            <ul class="space-y-4 text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Kotlin (Primario)</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Java</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Spring Framework</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Spring Boot</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Python</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>C++</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-black text-xl mb-6 text-red-600">Frontend & Web</h5>
+                            <ul class="space-y-4 text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Angular</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>JavaScript (ES6+)</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>HTML5</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>CSS3</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>PHP</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Responsive Design</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-black text-xl mb-6 text-green-600">Database & Storage</h5>
+                            <ul class="space-y-4 text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>PostgreSQL</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>MariaDB</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>MySQL</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>SQL Avanzato</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Database Design</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Query Optimization</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-black text-xl mb-6 text-purple-600">Desktop & Tools</h5>
+                            <ul class="space-y-4 text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>JavaFX</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Java Swing</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Git & GitHub</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>IDE (IntelliJ, VS Code)</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>API REST</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Testing (JUnit)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="glass-card p-12 rounded-3xl mb-20">
+                    <h4 class="text-4xl font-black mb-12 gradient-text text-center">
+                        <i class="fas fa-question-circle mr-4"></i>Domande Frequenti
+                    </h4>
+                    <div class="space-y-6">
+                        <div class="faq-item bg-white p-6 rounded-2xl shadow-lg cursor-pointer" onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold text-xl text-gray-800">Sei disponibile per progetti freelance?</h5>
+                                <i class="fas fa-chevron-down text-purple-600 text-xl transition-transform duration-300"></i>
+                            </div>
+                            <div class="faq-answer mt-4 text-gray-600 text-lg">
+                                <p>Assolutamente sì! Essendo neolaureato, sono molto motivato a lavorare su progetti interessanti che mi permettano di crescere professionalmente. Sono disponibile sia per progetti a breve termine che per collaborazioni a lungo termine.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-white p-6 rounded-2xl shadow-lg cursor-pointer" onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold text-xl text-gray-800">Qual è la tua specializzazione principale?</h5>
+                                <i class="fas fa-chevron-down text-purple-600 text-xl transition-transform duration-300"></i>
+                            </div>
+                            <div class="faq-answer mt-4 text-gray-600 text-lg">
+                                <p>La mia specializzazione principale è lo sviluppo backend con Kotlin e Spring Framework, ma ho anche solide competenze frontend con Angular. Mi piace lavorare su progetti full-stack dove posso applicare tutte le mie conoscenze.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-white p-6 rounded-2xl shadow-lg cursor-pointer" onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold text-xl text-gray-800">Hai esperienza con progetti reali?</h5>
+                                <i class="fas fa-chevron-down text-purple-600 text-xl transition-transform duration-300"></i>
+                            </div>
+                            <div class="faq-answer mt-4 text-gray-600 text-lg">
+                                <p>Durante il mio percorso universitario ho sviluppato diversi progetti pratici, inclusi sistemi e-commerce, dashboard analytics e applicazioni desktop. Ho anche collaborato in team su progetti complessi utilizzando metodologie agili.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-white p-6 rounded-2xl shadow-lg cursor-pointer" onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold text-xl text-gray-800">Quanto tempo richiedi per i progetti?</h5>
+                                <i class="fas fa-chevron-down text-purple-600 text-xl transition-transform duration-300"></i>
+                            </div>
+                            <div class="faq-answer mt-4 text-gray-600 text-lg">
+                                <p>I tempi dipendono dalla complessità del progetto. Per progetti semplici (API REST basic) circa 3-5 giorni, per progetti più complessi (applicazioni complete) 1-3 settimane. Fornisco sempre stime realistiche durante la fase di consultazione.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-white p-6 rounded-2xl shadow-lg cursor-pointer" onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold text-xl text-gray-800">Offri supporto post-progetto?</h5>
+                                <i class="fas fa-chevron-down text-purple-600 text-xl transition-transform duration-300"></i>
+                            </div>
+                            <div class="faq-answer mt-4 text-gray-600 text-lg">
+                                <p>Certamente! Includo sempre un periodo di supporto post-consegna per bug fixes e piccole modifiche. Per supporto a lungo termine, possiamo concordare modalità di manutenzione dedicate al tuo progetto.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-white p-6 rounded-2xl shadow-lg cursor-pointer" onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold text-xl text-gray-800">Come gestisci la comunicazione durante i progetti?</h5>
+                                <i class="fas fa-chevron-down text-purple-600 text-xl transition-transform duration-300"></i>
+                            </div>
+                            <div class="faq-answer mt-4 text-gray-600 text-lg">
+                                <p>Credo nella comunicazione trasparente e frequente. Fornisco aggiornamenti regolari via email, condivido il progresso attraverso repository Git e sono disponibile per call/videocall per discutere aspetti tecnici o modifiche.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approach Section -->
+                <div class="text-center">
+                    <h4 class="text-4xl font-black mb-12 gradient-text-2">Il mio approccio allo sviluppo</h4>
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div class="tech-card bg-white p-8 rounded-3xl">
+                            <i class="fas fa-brain text-5xl gradient-text mb-6"></i>
+                            <h5 class="font-black text-2xl mb-4">Analisi Approfondita</h5>
+                            <p class="text-gray-600 text-lg">Studio ogni requisito con attenzione per proporre la soluzione più adatta</p>
+                        </div>
+                        <div class="tech-card bg-white p-8 rounded-3xl">
+                            <i class="fas fa-rocket text-5xl gradient-text-2 mb-6"></i>
+                            <h5 class="font-black text-2xl mb-4">Sviluppo Agile</h5>
+                            <p class="text-gray-600 text-lg">Sviluppo iterativo con feedback continui per risultati ottimali</p>
+                        </div>
+                        <div class="tech-card bg-white p-8 rounded-3xl">
+                            <i class="fas fa-shield-alt text-5xl gradient-text-3 mb-6"></i>
+                            <h5 class="font-black text-2xl mb-4">Qualità del Codice</h5>
+                            <p class="text-gray-600 text-lg">Clean code, testing e documentazione per software manutenibile</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="section">
+    <div class="py-24 bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-6xl font-black text-center mb-20 gradient-text">I miei servizi</h2>
+
+            <!-- Introduction -->
+            <div class="max-w-5xl mx-auto text-center mb-20">
+                <div class="glass-card p-12 rounded-3xl">
+                    <p class="text-2xl text-gray-700 leading-relaxed font-medium">
+                        Come <strong>neolaureato in Informatica presso UNICAL</strong>, offro soluzioni moderne e innovative
+                        per tutte le tue esigenze digitali. Ogni progetto è sviluppato con le tecnologie più attuali
+                        e seguendo le best practices apprese durante il mio percorso accademico.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Service Packages Enhanced -->
+            <div class="grid lg:grid-cols-3 gap-12 mb-20">
+                <!-- Pacchetto Base -->
+                <div class="service-card p-8 lg:p-10 rounded-3xl shadow-2xl">
+                    <div class="text-center mb-8">
+                        <div class="w-24 h-24 mx-auto bg-gradient-to-r from-green-400 to-green-600 rounded-3xl flex items-center justify-center mb-6">
+                            <i class="fas fa-rocket text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl lg:text-3xl font-black mb-4 gradient-text">Pacchetto Starter</h3>
+                        <p class="text-gray-600 text-lg font-semibold">Perfetto per iniziare</p>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-gray-700 mb-8 text-base lg:text-lg leading-relaxed">
+                            <strong>Ideale per progetti semplici e MVP.</strong> Configurazione professionale di un progetto
+                            Kotlin/Spring Boot con database, API REST funzionali e codice pulito pronto per essere esteso.
+                        </p>
+
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Setup progetto Kotlin + Spring Boot</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Connessione database PostgreSQL/MariaDB</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">2 endpoint REST (GET/POST)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Codice documentato e clean</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Supporto 2 giorni post-delivery</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-6 bg-gray-100 p-4 rounded-xl">
+                            <div class="flex items-center justify-center mb-2">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span class="font-semibold">Consegna: 3-4 giorni</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <i class="fas fa-sync-alt mr-2"></i>
+                                <span class="font-semibold">1 revisione inclusa</span>
+                            </div>
+                        </div>
+                        <button onclick="openContactForm('starter')" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-xl font-black text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                            Richiedi Preventivo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pacchetto Standard -->
+                <div class="service-card p-8 lg:p-10 rounded-3xl shadow-2xl border-4 border-purple-200 relative">
+                    <div class="text-center mb-8">
+                        <div class="w-24 h-24 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mb-6">
+                            <i class="fas fa-star text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl lg:text-3xl font-black mb-4 gradient-text-2">Pacchetto Professional</h3>
+                        <p class="text-gray-600 text-lg font-semibold">Applicazioni complete</p>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-gray-700 mb-8 text-base lg:text-lg leading-relaxed">
+                            <strong>Soluzione completa per applicazioni reali.</strong> Sviluppo full-stack con autenticazione,
+                            più endpoint, gestione errori avanzata e frontend Angular opzionale.
+                        </p>
+
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Sistema autenticazione completo</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">4-6 endpoint REST complessi</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Gestione errori e validazione</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Frontend Angular (opzionale)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Script database + seed data</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Documentazione API</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-6 bg-gray-100 p-4 rounded-xl">
+                            <div class="flex items-center justify-center mb-2">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span class="font-semibold">Consegna: 7-10 giorni</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <i class="fas fa-sync-alt mr-2"></i>
+                                <span class="font-semibold">2 revisioni incluse</span>
+                            </div>
+                        </div>
+                        <button onclick="openContactForm('professional')" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-black text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                            Richiedi Preventivo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pacchetto Premium -->
+                <div class="service-card p-8 lg:p-10 rounded-3xl shadow-2xl">
+                    <div class="text-center mb-8">
+                        <div class="w-24 h-24 mx-auto bg-gradient-to-r from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center mb-6">
+                            <i class="fas fa-crown text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl lg:text-3xl font-black mb-4 gradient-text-3">Pacchetto Enterprise</h3>
+                        <p class="text-gray-600 text-lg font-semibold">Soluzioni complete</p>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-gray-700 mb-8 text-base lg:text-lg leading-relaxed">
+                            <strong>Soluzione enterprise completa.</strong> Architettura scalabile, sicurezza avanzata,
+                            interfaccia completa e deployment ready per applicazioni professionali.
+                        </p>
+
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Architettura microservizi (opzionale)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Sistema ruoli e autorizzazioni</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">8+ endpoint complessi</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Dashboard Angular completa</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Testing automatizzato</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 text-xl mt-1 mr-4 flex-shrink-0"></i>
+                                <span class="text-base lg:text-lg">Documentazione completa</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-6 bg-gray-100 p-4 rounded-xl">
+                            <div class="flex items-center justify-center mb-2">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span class="font-semibold">Consegna: 14-21 giorni</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <i class="fas fa-sync-alt mr-2"></i>
+                                <span class="font-semibold">3 revisioni incluse</span>
+                            </div>
+                        </div>
+                        <button onclick="openContactForm('enterprise')" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-4 rounded-xl font-black text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                            Richiedi Preventivo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="glass-card p-12 rounded-3xl mb-20">
+                <h3 class="text-4xl font-black text-center mb-12 gradient-text-2">Servizi Specializzati</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center p-8 tech-card bg-white rounded-2xl">
+                        <i class="fas fa-mobile-alt text-5xl gradient-text mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">App Desktop</h4>
+                        <p class="text-gray-600">Applicazioni JavaFX e Swing moderne</p>
+                    </div>
+                    <div class="text-center p-8 tech-card bg-white rounded-2xl">
+                        <i class="fas fa-chart-bar text-5xl gradient-text-2 mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">Data Analytics</h4>
+                        <p class="text-gray-600">Dashboard Python per analisi dati</p>
+                    </div>
+                    <div class="text-center p-8 tech-card bg-white rounded-2xl">
+                        <i class="fas fa-globe text-5xl gradient-text-3 mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">Siti Web PHP</h4>
+                        <p class="text-gray-600">Sviluppo web moderno e responsive</p>
+                    </div>
+                    <div class="text-center p-8 tech-card bg-white rounded-2xl">
+                        <i class="fas fa-database text-5xl gradient-text mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">Database Design</h4>
+                        <p class="text-gray-600">Progettazione e ottimizzazione DB</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Me Enhanced -->
+            <div class="bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600 p-12 rounded-3xl shadow-2xl text-white mb-20">
+                <h3 class="text-4xl font-black text-center mb-12">Perché scegliere BartoDevClub?</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <i class="fas fa-graduation-cap text-5xl mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">Formazione UNICAL</h4>
+                        <p class="opacity-90">Competenze solide e aggiornate</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-code text-5xl mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">Clean Code</h4>
+                        <p class="opacity-90">Codice pulito e manutenibile</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-rocket text-5xl mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">Tecnologie Moderne</h4>
+                        <p class="opacity-90">Stack tecnologico all'avanguardia</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-handshake text-5xl mb-4"></i>
+                        <h4 class="font-black text-xl mb-3">Supporto Dedicato</h4>
+                        <p class="opacity-90">Assistenza durante e dopo il progetto</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action Final -->
+            <div class="text-center">
+                <div class="glass-card p-12 rounded-3xl">
+                    <h3 class="text-4xl font-black mb-8 gradient-text">Iniziamo il tuo progetto!</h3>
+                    <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                        Hai un'idea innovativa? Trasformiamola insieme in una soluzione digitale di successo.
+                    </p>
+                    <button onclick="openContactForm('custom')" class="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white px-12 py-6 rounded-full font-black text-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 pulse-glow">
+                        <i class="fas fa-comments mr-3"></i>Contattami subito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Modal Enhanced -->
+<div id="contact-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-10 relative shadow-2xl">
+        <button onclick="closeContactForm()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+
+        <h3 class="text-4xl font-black mb-8 gradient-text text-center">Parliamo del tuo progetto</h3>
+
+        <form id="contact-form" onsubmit="submitContactForm(event)">
+            <input type="hidden" id="service-type" name="serviceType">
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-3 text-lg">Nome Completo *</label>
+                    <input type="text" name="fullName" required class="form-input w-full px-6 py-4 rounded-xl text-lg" placeholder="Il tuo nome completo">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-3 text-lg">Email *</label>
+                    <input type="email" name="email" required class="form-input w-full px-6 py-4 rounded-xl text-lg" placeholder="la.tua.email@esempio.com">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-3 text-lg">Telefono</label>
+                    <input type="tel" name="phone" class="form-input w-full px-6 py-4 rounded-xl text-lg" placeholder="+39 123 456 7890">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-3 text-lg">Azienda</label>
+                    <input type="text" name="company" class="form-input w-full px-6 py-4 rounded-xl text-lg" placeholder="Nome azienda (opzionale)">
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-3 text-lg">Tipo di Progetto *</label>
+                <select name="projectType" required class="form-input w-full px-6 py-4 rounded-xl text-lg">
+                    <option value="">Seleziona il tipo di progetto</option>
+                    <option value="api-backend">API Backend (Kotlin/Spring)</option>
+                    <option value="app-fullstack">Applicazione Full-Stack</option>
+                    <option value="sito-web">Sito Web (PHP/HTML)</option>
+                    <option value="app-desktop">Applicazione Desktop (JavaFX)</option>
+                    <option value="dashboard">Dashboard Analytics (Python)</option>
+                    <option value="e-commerce">Piattaforma E-Commerce</option>
+                    <option value="mobile-api">API per Mobile</option>
+                    <option value="altro">Altro (specifica nella descrizione)</option>
+                </select>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-3 text-lg">Budget Previsto</label>
+                <select name="budget" class="form-input w-full px-6 py-4 rounded-xl text-lg">
+                    <option value="">Seleziona il budget (opzionale)</option>
+                    <option value="under-300">Sotto €300 (Progetti semplici)</option>
+                    <option value="300-800">€300 - €800 (Progetti standard)</option>
+                    <option value="800-1500">€800 - €1.500 (Progetti complessi)</option>
+                    <option value="1500-3000">€1.500 - €3.000 (Progetti enterprise)</option>
+                    <option value="over-3000">Oltre €3.000 (Progetti su misura)</option>
+                    <option value="da-discutere">Da discutere insieme</option>
+                </select>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-gray-700 font-bold mb-3 text-lg">Descrizione del Progetto *</label>
+                <textarea name="description" required rows="6" class="form-input w-full px-6 py-4 rounded-xl text-lg" placeholder="Descrivi il tuo progetto nel dettaglio: obiettivi, funzionalità desiderate, tecnologie preferite, tempistiche, e qualsiasi altro requisito importante..."></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-5 rounded-xl font-black text-xl hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <i class="fas fa-paper-plane mr-3"></i>Invia Richiesta
+            </button>
+
+            <p class="text-sm text-gray-500 mt-6 text-center leading-relaxed">
+                Ti risponderò entro <strong>24 ore</strong> con un preventivo dettagliato e una proposta personalizzata per il tuo progetto.
+                <br>La consulenza iniziale è sempre <strong>gratuita</strong>! 🚀
+            </p>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="success-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-md w-full p-10 text-center shadow-2xl success-animation">
+        <div class="w-24 h-24 mx-auto bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mb-8">
+            <i class="fas fa-check text-4xl text-white"></i>
+        </div>
+        <h3 class="text-3xl font-black mb-6 gradient-text">Messaggio Inviato!</h3>
+        <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+            Grazie per avermi contattato! Ho ricevuto la tua richiesta e ti risponderò entro 24 ore con un preventivo dettagliato.
+        </p>
+        <button onclick="closeSuccessModal()" class="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300">
+            Perfetto!
+        </button>
+    </div>
+</div>
+
+<!-- Footer Enhanced -->
+<footer class="bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 text-white py-16">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-2">
+                <h3 class="text-4xl font-black mb-6 gradient-text-3 code-font">BartoDevClub</h3>
+                <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+                    Neolaureato in Informatica presso UNICAL, specializzato nello sviluppo di soluzioni moderne
+                    con Kotlin, Spring Framework, Angular e tecnologie all'avanguardia.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="mailto:mortekorto@gmail.com" class="text-gray-300 hover:text-white transition-colors transform hover:scale-110">
+                        <i class="fas fa-envelope text-3xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors transform hover:scale-110">
+                        <i class="fab fa-linkedin text-3xl"></i>
+                    </a>
+                    <a href="https://github.com/BartoDevClub" class="text-gray-300 hover:text-white transition-colors transform hover:scale-110">
+                        <i class="fab fa-github text-3xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors transform hover:scale-110">
+                        <i class="fab fa-telegram text-3xl"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-black mb-6 text-xl gradient-text-2">Servizi</h4>
+                <ul class="space-y-3 text-gray-300">
+                    <li><a href="#" class="hover:text-white transition-colors">Sviluppo Backend Kotlin</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Frontend Angular</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Applicazioni Desktop</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Siti Web PHP</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Database Design</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-black mb-6 text-xl gradient-text">Tecnologie</h4>
+                <ul class="space-y-3 text-gray-300">
+                    <li><i class="fas fa-code mr-2 text-purple-400"></i>Kotlin & Java</li>
+                    <li><i class="fas fa-leaf mr-2 text-green-400"></i>Spring Framework</li>
+                    <li><i class="fab fa-angular mr-2 text-red-400"></i>Angular & TypeScript</li>
+                    <li><i class="fas fa-database mr-2 text-blue-400"></i>PostgreSQL & MariaDB</li>
+                    <li><i class="fab fa-python mr-2 text-yellow-400"></i>Python & C++</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+            <p class="text-lg">&copy; 2024 <strong>BartoDevClub</strong>. Tutti i diritti riservati.</p>
+            <p class="mt-3 text-sm opacity-75">
+                Portfolio sviluppato con passione da un neolaureato UNICAL 🎓 |
+                Pronto per nuove sfide nel mondo dello sviluppo software 🚀
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Initialize EmailJS
+    emailjs.init("your_emailjs_user_id"); // Replace with your EmailJS user ID
+
+    // Carousel Variables
+    let currentSlide = 0;
+    const totalSlides = 3;
+    let carouselInterval;
+
+    // Fixed Typing Animation
+    function startTypingAnimation() {
+        const typingElement = document.getElementById('typing-text');
+        const text = "Sviluppatore Full Stack";
+        let i = 0;
+
+        typingElement.textContent = '';
+
+        function typeWriter() {
+            if (i < text.length) {
+                typingElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        setTimeout(typeWriter, 1500);
+    }
+
+    // Fixed Carousel Functions
+    function goToSlide(slideIndex) {
+        currentSlide = slideIndex;
+        const wrapper = document.getElementById('carousel-wrapper');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        goToSlide(currentSlide);
+    }
+
+    function startCarousel() {
+        carouselInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    }
+
+    function stopCarousel() {
+        clearInterval(carouselInterval);
+    }
+
+    // Navigation functions
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // Show selected section
+        document.getElementById(sectionId).classList.add('active');
+
+        // Update navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Find the clicked link and make it active
+        const clickedLink = event.target;
+        clickedLink.classList.add('active');
+
+        // Close mobile menu if open
+        document.getElementById('mobile-menu').classList.add('hidden');
+    }
+
+    function toggleMobileMenu() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // Contact form functions
+    function openContactForm(serviceType) {
+        document.getElementById('service-type').value = serviceType;
+        document.getElementById('contact-modal').classList.remove('hidden');
+
+        // Populate service type in description based on package
+        const descriptions = {
+            'starter': 'Sono interessato al Pacchetto Starter per un progetto API REST semplice con Kotlin e Spring Boot.',
+            'professional': 'Sono interessato al Pacchetto Professional per un\'applicazione completa con autenticazione e frontend.',
+            'enterprise': 'Sono interessato al Pacchetto Enterprise per una soluzione completa e scalabile.',
+            'custom': 'Vorrei discutere un progetto personalizzato adatto alle mie esigenze specifiche.'
+        };
+
+        const descriptionField = document.querySelector('textarea[name="description"]');
+        if (descriptions[serviceType]) {
+            descriptionField.placeholder = descriptions[serviceType] + ' ' + descriptionField.placeholder;
+        }
+    }
+
+    function closeContactForm() {
+        document.getElementById('contact-modal').classList.add('hidden');
+        document.getElementById('contact-form').reset();
+    }
+
+    function closeSuccessModal() {
+        document.getElementById('success-modal').classList.add('hidden');
+    }
+
+    async function submitContactForm(event) {
+        event.preventDefault();
+
+        const submitBtn = document.getElementById('submit-btn');
+        const originalText = submitBtn.innerHTML;
+
+        // Show loading state
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i>Invio in corso<span class="loading-dots"></span>';
+        submitBtn.disabled = true;
+
+        try {
+            // Get form data
+            const formData = new FormData(event.target);
+            const templateParams = {
+                from_name: formData.get('fullName'),
+                from_email: formData.get('email'),
+                phone: formData.get('phone') || 'Non specificato',
+                company: formData.get('company') || 'Non specificata',
+                service_type: formData.get('serviceType'),
+                project_type: formData.get('projectType'),
+                budget: formData.get('budget') || 'Da discutere',
+                message: formData.get('description'),
+                to_email: 'mortekorto@gmail.com'
+            };
+
+            // Send email using EmailJS
+            await emailjs.send('your_service_id', 'your_template_id', templateParams);
+
+            // Show success
+            closeContactForm();
+            document.getElementById('success-modal').classList.remove('hidden');
+
+        } catch (error) {
+            console.error('Error sending email:', error);
+            alert('Si è verificato un errore durante l\'invio. Ti prego di riprovare o contattarmi direttamente a mortekorto@gmail.com');
+        } finally {
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    }
+
+    // FAQ functionality
+    function toggleFaq(element) {
+        const answer = element.querySelector('.faq-answer');
+        const icon = element.querySelector('i');
+
+        // Toggle active class
+        element.classList.toggle('active');
+
+        // Toggle answer visibility
+        answer.classList.toggle('open');
+
+        // Rotate icon
+        if (answer.classList.contains('open')) {
+            icon.style.transform = 'rotate(180deg)';
+        } else {
+            icon.style.transform = 'rotate(0deg)';
+        }
+    }
+
+    // Enhanced animations on scroll
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.tech-card, .service-card, .carousel-item');
+
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    }
+
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set initial state for animated elements
+        const elements = document.querySelectorAll('.tech-card, .service-card');
+        elements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(50px)';
+            element.style.transition = 'all 0.6s ease';
+        });
+
+        // Animate on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Start typing animation
+        startTypingAnimation();
+
+        // Start carousel
+        startCarousel();
+
+        // Pause carousel on hover
+        const carousel = document.getElementById('tech-carousel');
+        carousel.addEventListener('mouseenter', stopCarousel);
+        carousel.addEventListener('mouseleave', startCarousel);
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2))';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+    });
+
+    // Close modals when clicking outside
+    document.getElementById('contact-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeContactForm();
+        }
+    });
+
+    document.getElementById('success-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeSuccessModal();
+        }
+    });
+
+    // Add tech badge interactions
+    document.addEventListener('DOMContentLoaded', function() {
+        const techBadges = document.querySelectorAll('.tech-badge');
+
+        techBadges.forEach(badge => {
+            badge.addEventListener('mouseenter', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'bounceIn 0.6s ease';
+                }, 10);
+            });
+        });
+    });
+
+    // Add particle animation
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+
+        const particlesContainer = document.querySelector('.particles');
+        if (particlesContainer) {
+            particlesContainer.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 8000);
+        }
+    }
+
+    // Create particles periodically
+    setInterval(createParticle, 2000);
+</script>
+
+</body>
+</html>
